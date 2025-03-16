@@ -1,0 +1,28 @@
+@import url(header.css);
+@import url(custom.css);
+
+main {
+  width: 100%;
+  padding: 0 120px;
+  margin-top: 70px;
+}
+
+.filters {
+  width: 688px;
+  display: flex;
+  gap: 45px;
+  border: 1px solid var(--color-light-grayish-blue);
+  border-radius: 10px;
+  margin: 52px 0 79px;
+}
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.filter-item span {
+  padding: 12.5px 0 12.5px 18px;
+  font-size: 16px;
+}
