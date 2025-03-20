@@ -2,6 +2,7 @@ const API_URL = "https://momentum.redberryinternship.ge/api";
 const TOKEN = "9e73de3d-3ad4-4b01-85f8-f2d717145333";
 
 async function fetchData(endpoint, filters = {}) {
+  
   try {
     const response = await axios.get(`${API_URL}/${endpoint}`, {
       headers: { Authorization: `Bearer ${TOKEN}` },
@@ -23,7 +24,7 @@ const statusCategories = [
 
 async function fetchAndRenderTasks(filters = {}) {
   const tasks = await fetchData("tasks", filters);
-  renderTasks(tasks);
+  return tasks;
 }
 
 function renderTasks(tasks) {
@@ -93,7 +94,6 @@ function createTaskCard(task) {
   const formattedDate = formatDate(task.due_date);
   const formattedTaskName = capitalizeFirstLetter(task.name);
 
-  // Status-based color mapping
   const statusColors = {
     "დასაწყები": "var(--color-mainyellow)",
     "პროგრესში": "var(--color-mainorange)",
@@ -153,11 +153,12 @@ function renderFilterModal(type, items) {
 
   modal.innerHTML = `
     <div class="modal-content">
-      <h2>აირჩიეთ ${type}</h2>
       <div class="filter-options ${gridClass}">
         ${items.map(item => createFilterOption(type, item)).join("")}
       </div>
-      <button id="applyFilter">არჩევა</button>
+      <div class="filter-apply-button">
+        <button id="applyFilter">არჩევა</button>
+      </div>
     </div>
   `;
 
@@ -192,17 +193,37 @@ function applyFilters() {
   const selectedFilters = { department: [], priority: [], employee: null };
 
   document.querySelectorAll(".filter-option:checked").forEach(input => {
-    if (input.dataset.type === "თანამშრომელი") {
+    const typeMap = {
+      "დეპარტამენტი": "department",
+      "პრიორიტეტი": "priority",
+      "თანამშრომელი": "employee"
+    };
+
+    const mappedType = typeMap[input.dataset.type];
+
+    if (mappedType === "employee") {
       selectedFilters.employee = input.value;
-    } else {
-      selectedFilters[input.dataset.type].push(input.value);
+    } else if (mappedType) {
+      selectedFilters[mappedType].push(input.value);
     }
   });
 
-  fetchAndRenderTasks({
-    department_ids: selectedFilters.department.length ? selectedFilters.department.join(",") : null,
-    priority_ids: selectedFilters.priority.length ? selectedFilters.priority.join(",") : null,
-    employee_id: selectedFilters.employee || null,
+  fetchAndRenderTasks().then(allTasks => {
+    let filteredTasks = allTasks;
+
+    if (selectedFilters.employee) {
+      filteredTasks = filteredTasks.filter(task => task.employee.id == selectedFilters.employee);
+    }
+
+    if (selectedFilters.department.length > 0) {
+      filteredTasks = filteredTasks.filter(task => selectedFilters.department.includes(task.department.id.toString()));
+    }
+
+    if (selectedFilters.priority.length > 0) {
+      filteredTasks = filteredTasks.filter(task => selectedFilters.priority.includes(task.priority.id.toString()));
+    }
+
+    renderTasks(filteredTasks);
   });
 }
 
@@ -216,4 +237,4 @@ document.querySelector(".three").addEventListener("click", () =>
   openFilterModal("თანამშრომელი", "employees")
 );
 
-fetchAndRenderTasks();
+fetchAndRenderTasks().then(renderTasks);

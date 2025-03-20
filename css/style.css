@@ -167,14 +167,59 @@ main {
 }
 
 .modal {
+  width: 688px;
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 31%;
+  left: 25%;
   transform: translate(-50%, -50%);
-  background: white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  width: 400px;
-  max-width: 90%;
-  padding: 20px;
+  border: 0.5px solid var(--color-mainpurple);
+  background-color: var(--color-white);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 40px 30px 20px;
+}
+
+.filter-options {
+  gap: 23.5px;
+}
+
+.grid-two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-one-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-option {
+  margin-right: 15px;
+}
+
+.employee-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.filter-apply-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#applyFilter {
+  background-color: var(--color-mainpurple);
+  border-radius: 20px;
+  font-size: 16px;
+  color: var(--color-white);
+  padding: 8px 49.5px;
+  border: none;
+  cursor: pointer;
+  text-align: right;
 }
