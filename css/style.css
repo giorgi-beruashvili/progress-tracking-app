@@ -27,3 +27,154 @@ main {
   font-size: 16px;
 }
 
+.dashboard {
+  display: flex;
+  gap: 52px;
+}
+
+.status-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;  
+  width: 381px;
+}
+
+.status-header-container {
+  border-radius: 10px;
+}
+
+.status-start {
+  background-color: var(--color-mainyellow);
+}
+
+.status-progress {
+  background-color: var(--color-mainorange);
+}
+
+.status-test-ready {
+  background-color: var(--pure-or-mostly-pure-pink);
+}
+
+.status-complete {
+  background-color: var(--color-mainblue);
+}
+
+.status-header {
+  font-weight: 500;
+  text-align: center;
+  font-size: 20px;
+  color: var(--color-white);
+  padding: 15px 0;
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;  
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;  
+  padding: 20px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-mainyellow);
+  border-radius: 15px;
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-header-left {
+  display: flex;
+  gap: 10px;
+}
+
+.task-priority {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 0.5px solid var(--color-vivid-orange);
+}
+
+.task-priority span {
+  font-weight: 500;
+  color: var(--color-vivid-orange);
+  font-size: 12px;
+}
+
+.task-header-left > span {
+  background-color: var(--color-mainpink);
+  color: var(--color-white);
+  padding: 5px 18.5px;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
+.task-header-right span {
+  font-size: 12px;
+  white-space: nowrap; 
+}
+
+.task-main {
+  padding: 0 10.5px;
+}
+
+.task-title {
+  font-weight: 500px;
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: var(--color-grey-shades-headlines);
+}
+
+.task-main p {
+  font-size: 14px;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-footer-left img {
+  width: 31px;
+  height: 31px;
+}
+
+.task-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+}
+
+.task-footer-right img {
+  width: 22px;
+  height: 22px;
+}
+
+.task-footer-right span {
+  width: 8px;
+  height: 17px;
+  font-size: 14px;
+  color: var(--color-grey-shades-headlines);
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  padding: 20px;
+}

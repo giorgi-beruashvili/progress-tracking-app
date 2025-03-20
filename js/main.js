@@ -30,8 +30,8 @@ function renderTasks(tasks) {
   const dashboard = document.getElementById("dashboard");
   dashboard.innerHTML = statusCategories
     .map(category => `
-      <div class="status-column ${category.class}" id="${category.key}">
-        <div class="status-header-container">
+      <div class="status-column" id="${category.key}">
+        <div class="status-header-container ${category.class}">
           <h2 class="status-header">${category.title}</h2>
         </div>
         <div class="tasks-container"></div>
@@ -47,22 +47,88 @@ function renderTasks(tasks) {
   });
 }
 
+document.querySelectorAll(".task-header-left > span").forEach(span => {
+  let words = span.textContent.trim().split(" ");
+  if (words.length > 1) {
+    span.textContent = `${words[0]}...`;
+  }
+});
+
+function formatDate(dateString) {
+  const monthNames = {
+    "01": "იან",
+    "02": "თებ",
+    "03": "მარ",
+    "04": "აპრ",
+    "05": "მაი",
+    "06": "ივნ",
+    "07": "ივლ",
+    "08": "აგვ",
+    "09": "სექ",
+    "10": "ოქტ",
+    "11": "ნოე",
+    "12": "დეკ"
+  };
+
+  const date = new Date(dateString);
+  const day = date.getUTCDate();
+  const month = monthNames[String(date.getUTCMonth() + 1).padStart(2, "0")];
+  const year = date.getUTCFullYear();
+
+  return `${day} ${month}, ${year}`;
+}
+
+function capitalizeFirstLetter(text) {
+  if (!text) return "";
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function truncateText(text, maxLength) {
+  if (!text) return "";
+  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+}
+
 function createTaskCard(task) {
+  let truncatedDepartmentName = task.department.name.split(" ")[0] + "...";
+  const formattedDate = formatDate(task.due_date);
+  const formattedTaskName = capitalizeFirstLetter(task.name);
+
+  // Status-based color mapping
+  const statusColors = {
+    "დასაწყები": "var(--color-mainyellow)",
+    "პროგრესში": "var(--color-mainorange)",
+    "მზად ტესტირებისთვის": "var(--pure-or-mostly-pure-pink)",
+    "დასრულებული": "var(--color-mainblue)"
+  };
+
+  const borderColor = statusColors[task.status.name] || "var(--color-grey)";
+
   return `
-    <div class="task">
+    <div class="task" style="border: 1px solid ${borderColor}">
       <div class="task-header">
-        <button class="task-priority">
-          <img src="${task.priority.icon}">
-          ${task.priority.name}
-        </button>
-        <span>${task.department.name}</span>
-        <span>${task.due_date}</span>
+        <div class="task-header-left">
+          <button class="task-priority" style="border: 1px solid ${borderColor}">
+            <img class="task-priority-img" style="color: ${borderColor}" src="${task.priority.icon}" width="12" height="9">
+            <span style="color: ${borderColor}">${task.priority.name}</span>
+          </button>
+          <span>${truncatedDepartmentName}</span>
+        </div>
+        <div class="task-header-right">
+          <span>${formattedDate}</span>
+        </div>
       </div>
-      <h3 class="task-title">${task.name}</h3>
-      <p>${task.description}</p>
+      <div class="task-main">
+        <h3 class="task-title">${formattedTaskName}</h3>
+        <p>${truncateText(task.description, 100)}</p>
+      </div>
       <div class="task-footer">
-        <img src="${task.employee.avatar}">
-        <span>${task.total_comments} </span>
+        <div class="task-footer-left">
+          <img src="${task.employee.avatar}">
+        </div>
+        <div class="task-footer-right">
+          <img src="assets/images/Comments.svg">
+          <span>${task.total_comments}</span>
+        </div>
       </div>
     </div>
   `;
