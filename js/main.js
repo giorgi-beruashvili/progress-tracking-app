@@ -238,3 +238,138 @@ document.querySelector(".three").addEventListener("click", () =>
 );
 
 fetchAndRenderTasks().then(renderTasks);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const openModalBtn = document.getElementById("employee-creation-modal");
+  let modal = null;
+
+  function createModal() {
+    if (document.getElementById("employeeModal")) {
+      return;
+    }
+
+    modal = document.createElement("div");
+    modal.id = "employeeModal";
+    modal.classList.add("create-modal");
+    modal.innerHTML = `
+      <div class="modal-overlay" id="modalBackdrop">
+        <div class="full-modal-content">
+          <div class="modal-close-div">
+            <img src="assets/images/Vector.svg" class="modal-close" width="40px" height="40px">
+          </div>
+          <div class="modal-contentt">
+            <h2 class="modal-title-c">თანამშრომლის დამატება</h2>
+            <form id="employeeForm" class="modal-form">
+              <div class="name-surname">
+                <div class="input-group">
+                  <label for="employeeName">სახელი*</label>
+                  <input type="text" id="employeeName" required>
+                </div>
+                <div class="input-group">
+                  <label for="employeeSurname">გვარი*</label>
+                  <input type="text" id="employeeSurname" required>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="employeeAvatar">ავატარი:</label>
+                <input type="file" id="employeeAvatar" accept="image/*">
+              </div>
+              <div class="input-group">
+                <label for="employeeDepartment">დეპარტამენტი:</label>
+                <select id="employeeDepartment" required>
+                  <option value="">აირჩიეთ დეპარტამენტი</option>
+                  <option value="1">ადმინისტრაციის დეპარტამენტი</option>
+                  <option value="2">ადამიანური რესურსების დეპარტამენტი</option>
+                  <option value="3">ფინანსების დეპარტამენტი</option>
+                  <option value="3">გაყიდვები და მარკეტინგის დეპარტამენტი</option>
+                  <option value="3">ლოჯოსტიკის დეპარტამენტი</option>
+                  <option value="3">ტექნოლოგიების დეპარტამენტი</option>
+                  <option value="3">მედიის დეპარტამენტი</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+              <button type="button" id="dissapear-modal">გაუქმება</button>
+              <button type="submit" id="saveEmployee" class="btn-save">დაამატე თანამშრომელი</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    addModalEventListeners();
+  }
+
+  function closeModal() {
+    const existingModal = document.getElementById("employeeModal");
+    if (existingModal) {
+      existingModal.remove();
+    }
+  }
+
+  function addModalEventListeners() {
+    const closeModalBtn = modal.querySelector(".modal-close");
+    const modalContent = modal.querySelector(".full-modal-content");
+    const saveEmployeeBtn = modal.querySelector("#saveEmployee");
+    const cancelBtn = modal.querySelector("#dissapear-modal");
+    const modalOverlay = modal.querySelector("#modalBackdrop");
+    const employeeForm = modal.querySelector("#employeeForm");
+
+    closeModalBtn.addEventListener("click", closeModal);
+
+    modalOverlay.addEventListener("click", (event) => {
+      if (!modalContent.contains(event.target)) {
+        closeModal();
+      }
+    });
+
+    cancelBtn.addEventListener("click", closeModal);
+
+    employeeForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("employeeName").value.trim();
+      const surname = document.getElementById("employeeSurname").value.trim();
+      const departmentId = document.getElementById("employeeDepartment").value;
+      const avatarInput = document.getElementById("employeeAvatar");
+
+      if (!name || !surname || !departmentId) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("surname", surname);
+      formData.append("department_id", departmentId);
+
+      if (avatarInput.files.length > 0) {
+        formData.append("avatar", avatarInput.files[0]);
+      }
+
+      try {
+        const response = await axios.post(`${API_URL}/employees`, formData, {
+          headers: { 
+            Authorization: `Bearer ${TOKEN}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        alert("Employee added successfully!");
+        closeModal();
+      } catch (error) {
+        console.error("Error saving employee:", error.response?.data || error.message);
+        alert("Failed to add employee. Please check your input and try again.");
+      }
+    });
+  }
+
+  openModalBtn.addEventListener("click", () => {
+    if (!document.getElementById("employeeModal")) {
+      createModal();
+    } else {
+      closeModal();
+    }
+  });
+});

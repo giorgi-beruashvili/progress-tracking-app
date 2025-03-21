@@ -223,3 +223,109 @@ main {
   cursor: pointer;
   text-align: right;
 }
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-background-blar);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+  .full-modal-content {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+  }
+
+.modal-close-div {
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center; 
+  cursor: pointer;
+  padding: 40px 50px 0 0;
+}
+
+.modal-contentt {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.modal-title-c {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--color-grey-shades-headlines);
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  padding: 0 50px 60px;
+}
+
+.name-surname {
+  display: flex;
+  gap: 45px;
+}
+
+.input-group label {
+  color: var(--very-dark-grayish-blue);
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--color-mainoutline);
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.input-group img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 10px auto;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 22px;
+}
+
+.modal-footer button {
+  padding: 10px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid var(--color-mainpurple);
+  color: var(--very-dark-grayish-blue);
+}
+
+#saveEmployee {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--color-mainpurple);
+  color: var(--color-white);
+}
