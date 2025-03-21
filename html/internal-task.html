@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>დავალების დეტალები</title>
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/internal-task.css">
+    <script defer src="../js/library/axios.min.js"></script>
+    <script defer src="../js/task.creation.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+          <img src="../assets/images/Frame 1000006027.svg" alt="logo" />
+        </div>
+        <nav>
+          <button id="employee-creation-modal">თანამშრომლის შექმნა</button>
+          <button onclick="window.location.href='/html/task-creation.html'">
+            <img src="../assets/images/add.svg" alt="add" />
+            შექმენი ახალი დავალება
+        </button>
+        </nav>
+    </header>
+    <div class="card">
+        <div class="badges">
+            <span class="badge-orange">უკან</span>
+            <span class="badge-pink">დავალება</span>
+        </div>
+        <h1 id="task-name">Redberry-ჰი მუშაობის გაგრძელებაზე</h1>
+        <p id="task-desc" class="description">ჩვენი გუნდი მუშაობს Redberry-ში, სადაც ყოველდღიურად ვქმნით ინოვაციურ და მაღალი ხარისხის პროდუქტებს. Redberry-ში მუშაობა გულისხმობს მუდმივ განვითარებას, გამოწვევებთან გამკლავებას და გუნდური მუშაობის უნარების გაუმჯობესებას. ჩვენი მიზანია, შევქმნათ ისეთი გარემო, სადაც თითოეული თანამშრომელი თავს გრძნობს დაფასებულად და მოტივირებულად.</p>
+        <div class="info-group">
+            <img src="clock-icon.svg" alt="clock icon">
+            <span id="task-status">სტატუსი: მიმდინარე</span>
+        </div>
+        <div class="info-group">
+            <img src="priority-icon.svg" alt="priority icon">
+            <span id="task-priority">პრიორიტეტი: მაღალი</span>
+        </div>
+        <div class="info-group">
+            <img src="department-icon.svg" alt="department icon">
+            <span id="task-dept">დეპარტამენტი: IT</span>
+        </div>
+        <div class="info-group">
+            <img id="employee-avatar" src="avatar.png" alt="avatar">
+            <span id="employee-name">ანა გიორგაძე</span>
+        </div>
+        <div class="info-group">
+            <img src="calendar-icon.svg" alt="calendar icon">
+            <span id="due-date">თარიღი: 03.12.2025</span>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h2>კომენტარები</h2>
+        <div id="comments">
+            <div class="comment">
+                <img src="avatar1.png" alt="Avatar" class="comment-avatar">
+                <div class="comment-content">
+                    <span class="comment-name">ანა გიორგაძე</span>
+                    <p class="comment-text">ძალიან კარგი იდეაა, მაგრამ ჯობს ცოტა მეტი დეტალი დავამატოთ.</p>
+                </div>
+            </div>
+            <!-- Add more comments as needed -->
+        </div>
+        <div class="comment-input">
+            <input type="text" placeholder="დაწერე კომენტარი..." class="comment-field">
+            <button class="send-button">
+                <img src="paper-plane-icon.svg" alt="Send">
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

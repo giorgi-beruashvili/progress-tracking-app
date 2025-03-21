@@ -46,6 +46,12 @@ function renderTasks(tasks) {
       column.querySelector(".tasks-container").innerHTML += createTaskCard(task);
     }
   });
+  document.querySelectorAll(".status-column").forEach(column => {
+    column.addEventListener("click", () => {
+      const statusKey = column.id;
+      window.location.href = `/html/internal-task.html?status=${encodeURIComponent(statusKey)}`;
+    });
+  });
 }
 
 document.querySelectorAll(".task-header-left > span").forEach(span => {

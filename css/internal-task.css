@@ -1,0 +1,122 @@
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.badges {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.badge-orange {
+    color: #f29e31;
+    border: 1px solid #f29e31;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 13px;
+}
+.badge-pink {
+    background: #e1348b;
+    color: #fff;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+p.description {
+    margin: 0;
+    color: #333;
+    font-size: 14px;
+}
+.info-group {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    gap: 5px;
+}
+.info-group img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.comments-section {
+    background: #f4f0fa;
+    padding: 20px 20px 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.comments-section h2 {
+    font-size: 18px;
+    margin: 0 0 10px;
+}
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.comment-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.comment-content {
+    display: flex;
+    flex-direction: column;
+}
+.comment-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+.comment-text {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+}
+.comment-input {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.comment-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 14px;
+}
+.send-button {
+    background: #6a0dad;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.send-button img {
+    width: 20px;
+    height: 20px;
+}
