@@ -1,7 +1,11 @@
-# Ignore system-specific files
-.DS_Store
-Thumbs.db
-
-# Ignore editor settings (optional)
-.vscode/
-.idea/
+/nbproject/
+/.idea/*
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+node_modules/
+bin/
+obj/
+.vs/
